@@ -1,6 +1,8 @@
 import daisyui from 'daisyui';
-import type { Config } from 'tailwindcss';
 import tailwindcssAnimated from 'tailwindcss-animated';
+
+import type { Config } from 'tailwindcss';
+
 
 export default {
   content: [

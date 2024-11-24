@@ -3,7 +3,7 @@ const Navbar = () => {
     <nav>
       <section>
         <div>
-          <h1 className="text-center text-2xl font-semibold text-slate-900">
+          <h1 className='text-center text-2xl font-semibold text-black dark:text-white'>
             Tasks
           </h1>
         </div>
@@ -11,4 +11,5 @@ const Navbar = () => {
     </nav>
   );
 };
+
 export default Navbar;

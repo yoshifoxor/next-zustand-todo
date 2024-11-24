@@ -7,15 +7,15 @@ const TaskItem = ({ id, isCompleted, title }: Task) => {
 
   return (
     <div
-      className={`flex cursor-pointer items-center gap-3 rounded-md border p-4 shadow-sm transition hover:shadow-md ${
+      className={`flex cursor-pointer items-center gap-3 rounded-md border p-4 shadow-sm transition hover:shadow-md dark:border-slate-600 ${
         isCompleted ? 'opacity-60' : ''
       }`}
       onClick={toggleExpandedTaskCard}
     >
       <input
-        type="checkbox"
+        type='checkbox'
         checked={isCompleted}
-        className="checkbox"
+        className='checkbox'
         onClick={() => toggleTaskDone(id)}
         readOnly
         title={isCompleted ? 'Uncheck the task' : 'Check the task'}
@@ -23,7 +23,9 @@ const TaskItem = ({ id, isCompleted, title }: Task) => {
 
       <div>
         <h3
-          className={`select-none text-lg ${isCompleted ? 'line-through' : ''}`}
+          className={`select-none text-lg dark:text-white ${
+            isCompleted ? 'line-through' : ''
+          }`}
         >
           {title}
         </h3>

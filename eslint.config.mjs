@@ -14,15 +14,7 @@ const compat = new FlatCompat();
 
 export default config(
   {
-    ignores: [
-      'node_modules',
-      '.cache',
-      'build',
-      'public/build',
-      '.env',
-      'next-env.d.ts',
-      '.next',
-    ],
+    ignores: ['node_modules', '.cache', 'build', 'public/build', '.env', 'next-env.d.ts', '.next'],
   },
   {
     ...eslint.configs.recommended,
@@ -131,14 +123,7 @@ export default config(
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
           pathGroups: [
             {
               pattern: 'react',
@@ -150,9 +135,13 @@ export default config(
               group: 'external',
               position: 'before',
             },
-
+            {
+              pattern: '{@/**,./**}',
+              group: 'parent',
+              position: 'before',
+            },
           ],
-          pathGroupsExcludedImportTypes: [],
+          pathGroupsExcludedImportTypes: ['builtin', 'external', 'object'],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
@@ -180,3 +169,32 @@ export default config(
   },
   eslintConfigPrettier,
 );
+
+/* const custom = {
+  // Custom Rules (Not covered by plugins)
+  'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }],
+  'key-spacing': ['error', { beforeColon: false, afterColon: true }],
+  'no-useless-rename': 'error',
+
+  // Whitespace and Punctuation (Style Rules)
+  'no-trailing-spaces': 'error',
+  'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
+  'space-before-function-paren': ['error', 'never'],
+  'space-in-parens': ['error', 'never'],
+  'array-bracket-spacing': ['error', 'never'],
+  'object-curly-spacing': ['error', 'always'],
+  'func-call-spacing': ['error', 'never'],
+  'computed-property-spacing': ['error', 'never'],
+
+  // Naming Conventions
+  'no-underscore-dangle': ['error', { allow: ['_id', '__dirname'] }],
+
+  // Unused Variables
+  //'no-unused-vars': 'off',
+  '@typescript-eslint/no-unused-vars': ['warn'],
+  '@typescript-eslint/no-unused-expressions': [
+    'error',
+    { enforceForJSX: true },
+  ],
+
+}; */

@@ -1,8 +1,7 @@
 import { MdClearAll } from 'react-icons/md';
 
-import useStore from '@/store';
-
 import TaskItem from './TaskItem';
+import useStore from '@/store';
 
 const CompletedTasksList = () => {
   const { tasks, clearCompeletedTasks } = useStore();
@@ -12,10 +11,7 @@ const CompletedTasksList = () => {
       <div className="mb-1 flex items-center justify-between px-2">
         <h2 className="text-lg font-medium">Completed Tasks</h2>
         <div className="flex items-center">
-          <button
-            onClick={() => clearCompeletedTasks()}
-            title="Clear Completed Tasks"
-          >
+          <button onClick={() => clearCompeletedTasks()} title="Clear Completed Tasks">
             <MdClearAll size={24} />
           </button>
         </div>
