@@ -1,17 +1,23 @@
-import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
+import { create } from 'zustand';
 
 type TaskState = {
   tasks: Task[];
   addTask: (title: string) => void;
   deleteTask: (taskId: string) => void;
   toggleTaskDone: (taskId: string) => void;
+  clearCompeletedTasks: () => void;
+  checkTasksDone: () => void;
 };
 
 const useStore = create<TaskState>((set) => ({
   tasks: [
     { id: uuidv4(), title: 'Task num 1', isCompleted: false },
-    { id: uuidv4(), title: 'Task num 1', isCompleted: true },
+    { id: uuidv4(), title: 'Task num 2', isCompleted: true },
+    { id: uuidv4(), title: 'Task num 3', isCompleted: false },
+    { id: uuidv4(), title: 'Task num 4', isCompleted: true },
+    { id: uuidv4(), title: 'Task num 5', isCompleted: false },
+    { id: uuidv4(), title: 'Task num 6', isCompleted: true },
   ],
 
   addTask: (title) =>
@@ -26,11 +32,19 @@ const useStore = create<TaskState>((set) => ({
 
   toggleTaskDone: (taskId) => {
     set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === taskId ? { ...task, isTaskDone: !task.isCompleted } : task,
-      ),
+      tasks: state.tasks.map((task) => (task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task)),
     }));
   },
+
+  clearCompeletedTasks: () =>
+    set((state) => ({
+      tasks: state.tasks.filter((task) => !task.isCompleted),
+    })),
+
+  checkTasksDone: () =>
+    set((state) => ({
+      tasks: state.tasks.map((task) => (task.isCompleted ? task : { ...task, isCompleted: true })),
+    })),
 }));
 
 export default useStore;

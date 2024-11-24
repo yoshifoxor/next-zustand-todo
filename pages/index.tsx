@@ -1,21 +1,19 @@
+import CompletedTasksList from '@/components/CompletedTasksList';
+import Navbar from '@/components/Navbar';
 import TaskInput from '@/components/TaskInput';
-import TaskItem from '@/components/TaskItem';
+import UndoneTasksList from '@/components/UndoneTasksList';
 import useStore from '@/store';
 
 export default function Home() {
   const { tasks } = useStore();
+  const isAnyCompletedTask = tasks.filter((task) => task.isCompleted).length !== 0;
 
   return (
-    <div className="relative mx-auto mt-10 flex w-11/12 max-w-md flex-col gap-10">
-      <h1 className="text-center text-2xl font-semibold text-slate-900">
-        Tasks
-      </h1>
+    <div className="relative mx-auto my-10 flex w-11/12 max-w-lg flex-col gap-14">
+      <Navbar />
       <TaskInput />
-      <section className="flex flex-col gap-4">
-        {tasks.map((task) => (
-          <TaskItem key={task.id} {...task} />
-        ))}
-      </section>
+      <UndoneTasksList />
+      {isAnyCompletedTask && <CompletedTasksList />}
     </div>
   );
 }

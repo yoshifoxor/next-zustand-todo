@@ -1,4 +1,6 @@
+import daisyui from 'daisyui';
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimated from 'tailwindcss-animated';
 
 export default {
   content: [
@@ -10,10 +12,9 @@ export default {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },
-  plugins: [],
+  plugins: [daisyui, tailwindcssAnimated],
 } satisfies Config;

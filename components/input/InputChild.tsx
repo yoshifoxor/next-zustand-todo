@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+
 import { LuPlus } from 'react-icons/lu';
 
 import useStore from '@/store';
@@ -18,7 +19,7 @@ const InputChild = () => {
     <>
       <input
         type="text"
-        className="w-full rounded-xl border border-slate-300 bg-slate-200 px-6 py-3 text-lg shadow-md outline-none transition focus:shadow-xl"
+        className="w-full rounded-xl border px-6 py-3 text-lg shadow outline-none transition focus:shadow-lg"
         ref={addTaskInput}
         value={taskTitle}
         onChange={(e) => setTaskTitle(e.target.value)}
@@ -37,6 +38,7 @@ const InputChild = () => {
       <button
         className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-slate-700"
         onClick={() => addTask(taskTitle)}
+        title="Add new task"
       >
         <LuPlus size={32} />
       </button>
