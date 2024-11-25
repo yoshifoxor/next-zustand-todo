@@ -35,40 +35,6 @@ export default config(
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    ...reactRecommended,
-    ...reactJSXRuntime,
-    rules: {
-      ...reactRecommended.rules,
-      ...reactJSXRuntime.rules,
-
-      ///'arrow-parens': ['error', 'always'],
-      'key-spacing': ['error', { beforeColon: false, afterColon: true }],
-      /* 'no-extra-parens': [
-        'off',
-        'all',
-        {
-          conditionalAssign: true,
-          nestedBinaryExpressions: true,
-          returnAssign: false,
-          ignoreJSX: 'all',
-          enforceForArrowConditionals: false,
-        },
-      ], */
-      /* // Custom Rules (Not covered by plugins)
-      'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }],
-      'no-useless-rename': 'error',
-
-      // Whitespace and Punctuation (Style Rules)
-      'no-trailing-spaces': 'error',
-      'no-multi-spaces': ['error', { exceptions: { ArrayExpression: true } }],
-      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
-      'space-before-function-paren': ['error', 'never'],
-      'space-in-parens': ['error', 'never'],
-      'array-bracket-spacing': ['error', 'never'],
-      'object-curly-spacing': ['error', 'always'],
-      'func-call-spacing': ['error', 'never'],
-      'computed-property-spacing': ['error', 'never'], */
-    },
     languageOptions: {
       ...reactRecommended.languageOptions,
       ...reactJSXRuntime.languageOptions,
@@ -84,6 +50,31 @@ export default config(
       'import/resolver': {
         typescript: {},
       },
+    },
+    ...reactRecommended,
+    ...reactJSXRuntime,
+    rules: {
+      ...reactRecommended.rules,
+      ...reactJSXRuntime.rules,
+
+      'key-spacing': ['error', { beforeColon: false, afterColon: true }],
+
+      'react/self-closing-comp': ['error', { component: true, html: false }],
+      'react/jsx-curly-brace-presence': 'error',
+      /* // Custom Rules (Not covered by plugins)
+      'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }],
+      'no-useless-rename': 'error',
+
+      // Whitespace and Punctuation (Style Rules)
+      'no-trailing-spaces': 'error',
+      'no-multi-spaces': ['error', { exceptions: { ArrayExpression: true } }],
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1 }],
+      'space-before-function-paren': ['error', 'never'],
+      'space-in-parens': ['error', 'never'],
+      'array-bracket-spacing': ['error', 'never'],
+      'object-curly-spacing': ['error', 'always'],
+      'func-call-spacing': ['error', 'never'],
+      'computed-property-spacing': ['error', 'never'], */
     },
   },
   ...tailwindPlugin.configs['flat/recommended'],
@@ -150,7 +141,7 @@ export default config(
         },
       ],
       'import/newline-after-import': 'error',
-      /*       'no-unused-vars': 'off',
+      /* 'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' },

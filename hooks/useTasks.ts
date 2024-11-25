@@ -8,16 +8,17 @@ type TaskState = {
   toggleTaskDone: (taskId: string) => void;
   clearCompletedTasks: () => void;
   checkTasksDone: () => void;
+  toggleImportance: (taskId: string) => void;
 };
 
 const useTasks = create<TaskState>((set) => ({
   tasks: [
-    { id: uuidv4(), title: 'Task num 1', isCompleted: false },
-    { id: uuidv4(), title: 'Task num 2', isCompleted: true },
-    { id: uuidv4(), title: 'Task num 3', isCompleted: false },
+    { id: uuidv4(), title: 'Task num 1', isCompleted: false, isImportant: false },
+    { id: uuidv4(), title: 'Task num 2', isCompleted: true, isImportant: false },
+    { id: uuidv4(), title: 'Task num 3', isCompleted: false, isImportant: true },
     { id: uuidv4(), title: 'Task num 4', isCompleted: true },
     { id: uuidv4(), title: 'Task num 5', isCompleted: false },
-    { id: uuidv4(), title: 'Task num 6', isCompleted: true },
+    { id: uuidv4(), title: 'Task num 6', isCompleted: true, isImportant: true },
   ],
 
   addTask: (title) =>
@@ -32,7 +33,9 @@ const useTasks = create<TaskState>((set) => ({
 
   toggleTaskDone: (taskId) => {
     set((state) => ({
-      tasks: state.tasks.map((task) => (task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task)),
+      tasks: state.tasks.map((task) =>
+        task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task,
+      ),
     }));
   },
 
@@ -43,7 +46,16 @@ const useTasks = create<TaskState>((set) => ({
 
   checkTasksDone: () =>
     set((state) => ({
-      tasks: state.tasks.map((task) => (task.isCompleted ? task : { ...task, isCompleted: true })),
+      tasks: state.tasks.map((task) =>
+        task.isCompleted ? task : { ...task, isCompleted: true },
+      ),
+    })),
+
+  toggleImportance: (taskId) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === taskId ? { ...task, isImportant: !task.isImportant } : task,
+      ),
     })),
 }));
 

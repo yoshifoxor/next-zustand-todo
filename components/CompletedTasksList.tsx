@@ -13,11 +13,20 @@ const CompletedTasksList = () => {
 
   return (
     <section className="flex flex-col gap-2">
-      {isModalOpen && <Modal message={modalMessage} confirmFn={clearCompletedTasks} setIsModalOpen={setIsModalOpen} />}
+      {isModalOpen && (
+        <Modal
+          message={modalMessage}
+          confirmFn={clearCompletedTasks}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
       <div className="mb-1 flex items-center justify-between px-2">
         <h2 className="text-lg font-medium">Completed Tasks</h2>
         <div className="flex items-center">
-          <button onClick={() => setIsModalOpen(true)} title="Clear Completed Tasks">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            title="Clear Completed Tasks"
+          >
             <MdClearAll size={24} />
           </button>
         </div>

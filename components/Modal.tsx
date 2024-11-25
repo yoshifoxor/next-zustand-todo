@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 type ModalProps = {
-  message: string;
+  message:string;
   confirmFn: () => void;
   setIsModalOpen: (bool: boolean) => void;
 };
@@ -12,7 +12,7 @@ const Modal = ({ message, confirmFn, setIsModalOpen }: ModalProps) => {
     setIsModalOpen(false);
   };
 
-  const modalBox = useRef<HTMLDivElement|null>(null);
+  const modalBox = useRef<HTMLDivElement | null>(null);
 
   const clickOutsideCloseModal = (e: React.MouseEvent) => {
     if (modalBox.current && !modalBox.current.contains(e.target as Node)) {
@@ -34,13 +34,13 @@ const Modal = ({ message, confirmFn, setIsModalOpen }: ModalProps) => {
         </div>
         <div className="flex justify-center gap-8 px-5">
           <button
-            className={`w-20 rounded border bg-white py-2 font-medium transition hover:bg-black/10`}
+            className="w-20 rounded border bg-white py-2 font-medium transition hover:bg-black/10"
             onClick={() => setIsModalOpen(false)}
           >
             No
           </button>
           <button
-            className={`w-20 rounded border bg-red-500 py-2 font-medium text-white transition hover:bg-red-700`}
+            className="w-20 rounded border bg-red-500 py-2 font-medium text-white transition hover:bg-red-700"
             onClick={confirmModal}
           >
             Yes

@@ -6,7 +6,7 @@ type ModalState = {
   closeModal: () => void;
 };
 
-const useModal = create<ModalState>(set => ({
+const useModal = create<ModalState>((set) => ({
   isModalOpen: false,
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false }),
