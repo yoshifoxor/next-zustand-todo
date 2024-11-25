@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { LuPlus } from 'react-icons/lu';
 
-import useStore from '@/store';
+import useTasks from '@/hooks/useTasks';
 
 const InputChild = () => {
   const [taskTitle, setTaskTitle] = useState('');
   const addTaskInput = useRef<HTMLInputElement | null>(null);
-  const { addTask } = useStore();
+  const { addTask } = useTasks();
 
   useEffect(() => {
     addTaskInput.current?.focus();
@@ -27,7 +27,7 @@ const InputChild = () => {
             addTask(taskTitle);
             setTaskTitle('');
           } else if (e.key === 'Escape') {
-            if (document.activeElement === addTaskInput.current) {
+            if (addTaskInput.current === e.target) {
               addTaskInput.current?.blur();
             }
           }

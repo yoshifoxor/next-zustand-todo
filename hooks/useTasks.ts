@@ -6,11 +6,11 @@ type TaskState = {
   addTask: (title: string) => void;
   deleteTask: (taskId: string) => void;
   toggleTaskDone: (taskId: string) => void;
-  clearCompeletedTasks: () => void;
+  clearCompletedTasks: () => void;
   checkTasksDone: () => void;
 };
 
-const useStore = create<TaskState>((set) => ({
+const useTasks = create<TaskState>((set) => ({
   tasks: [
     { id: uuidv4(), title: 'Task num 1', isCompleted: false },
     { id: uuidv4(), title: 'Task num 2', isCompleted: true },
@@ -36,7 +36,7 @@ const useStore = create<TaskState>((set) => ({
     }));
   },
 
-  clearCompeletedTasks: () =>
+  clearCompletedTasks: () =>
     set((state) => ({
       tasks: state.tasks.filter((task) => !task.isCompleted),
     })),
@@ -47,4 +47,4 @@ const useStore = create<TaskState>((set) => ({
     })),
 }));
 
-export default useStore;
+export default useTasks;
