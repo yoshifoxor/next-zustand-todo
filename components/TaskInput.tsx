@@ -1,9 +1,12 @@
-import InputChild from './input/InputChild';
+import Input from './Input';
+import useTasks from '@/hooks/useTasks';
 
-const TaskInput = () => (
-  <div className="relative">
-    <InputChild />
-  </div>
-);
+const TaskInput = () => {
+  const { addTask } = useTasks();
+
+  return (
+    <Input callbackFn={addTask} placeholder="Add a task" title="Add new task" />
+  );
+};
 
 export default TaskInput;
