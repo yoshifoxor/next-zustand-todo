@@ -112,7 +112,15 @@ const useTasks = create<TasksStore>((set) => ({
           : task,
       ),
     })),
-  removeStep: (stepId) => set((state) => ({})),
+
+  removeStep: (taskId, stepId) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === taskId
+          ? { ...task, steps: task.steps.filter((step) => step.id !== stepId) }
+          : task,
+      ),
+    })),
 
   addNote: (taskId, payload) =>
     set((state) => ({
