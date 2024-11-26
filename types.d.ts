@@ -3,23 +3,33 @@ type Task = {
   title: string;
   isCompleted: boolean;
   isCardExpanded?: boolean;
+  note: string;
+  link: string;
   isImportant?: boolean;
-  steps: Task[];
-  link?: string;
-  note?: string;
+  steps: Step[];
   createdDate?: Date;
 };
 
 type Step = {
   id: string;
   title: string;
-  isCompleted: boolean;
-  isCardExpanded?: boolean;
-  isImportant?: boolean;
-  steps?: Step[];
+  isStepDone: boolean;
 };
 
-type StepState = {
-  id: string;
-  title: string;
+// Zustand useTasks types:
+type TasksStore = {
+  tasks: Task[];
+  addTask: (title: string) => void;
+  deleteTask: (taskId: string) => void;
+  toggleTaskDone: (taskId: string) => void;
+  clearCompletedTasks: () => void;
+  checkTasksDone: () => void;
+  toggleImportance: (taskId: string) => void;
+  toggleExpandCard: (taskId: string) => void;
+  addLink: (taskId: string, link: string) => void;
+  removeLink: (taskId: string) => void;
+  addStep: (taskId: string, payload: string) => void;
+  toggleStepDone: (stepId: string) => void;
+  removeStep: (stepId: string) => void;
+  addNote: (taskId: string, payload: string) => void;
 };

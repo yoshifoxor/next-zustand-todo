@@ -1,12 +1,16 @@
-import { useRef } from 'react';
+import { useRef } from "react";
 
 type ModalProps = {
-  message:string;
+  message: string;
   confirmFn: () => void;
   setIsModalOpen: (bool: boolean) => void;
 };
 
-const Modal = ({ message, confirmFn, setIsModalOpen }: ModalProps) => {
+export default function Modal({
+  message,
+  confirmFn,
+  setIsModalOpen,
+}: ModalProps) {
   const confirmModal = () => {
     confirmFn();
     setIsModalOpen(false);
@@ -49,6 +53,4 @@ const Modal = ({ message, confirmFn, setIsModalOpen }: ModalProps) => {
       </div>
     </div>
   );
-};
-
-export default Modal;
+}

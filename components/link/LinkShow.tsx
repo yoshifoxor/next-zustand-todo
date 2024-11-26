@@ -7,7 +7,7 @@ type Props = {
   id: string;
 };
 
-const LinkShow = ({ link, id }: Props) => {
+export default function LinkShow({ link, id }: Props) {
   const { removeLink } = useTasks();
 
   const unwantedParts = /((http:\/\/)|(https:\/\/)|(www.))/gim;
@@ -16,23 +16,23 @@ const LinkShow = ({ link, id }: Props) => {
   const extraPartOfLink = cleanLink.replace(/^[0-9a-z.-]*/gim, '');
 
   return (
-    <div className="flex items-center gap-3">
-      <div onClick={() => removeLink(id)}>
-        <MdLinkOff size={20} />
-      </div>
-      <div>
+    <div className="flex items-center gap-3 pl-6">
+      <div className="flex items-start gap-4">
+        <div onClick={() => removeLink(id)} className="translate-y-1">
+          <MdLinkOff size={20} />
+        </div>
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex"
+          className="font-light text-black/70 dark:text-gray-200"
         >
-          <span className="font-medium text-black">{boldPartOfLink}</span>
-          <span className="font-light text-black/70">{extraPartOfLink}</span>
+          <span className="font-medium text-black dark:text-white">
+            {boldPartOfLink}
+          </span>
+          {extraPartOfLink}
         </a>
       </div>
     </div>
   );
-};
-
-export default LinkShow;
+}

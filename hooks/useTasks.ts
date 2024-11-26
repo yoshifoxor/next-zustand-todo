@@ -1,62 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
-type TaskState = {
-  tasks: Task[];
-  addTask: (title: string) => void;
-  deleteTask: (taskId: string) => void;
-  toggleTaskDone: (taskId: string) => void;
-  clearCompletedTasks: () => void;
-  checkTasksDone: () => void;
-  toggleImportance: (taskId: string) => void;
-  toggleExpandCard: (taskId: string) => void;
-  removeLink: (taskId: string) => void;
-  addStep: (taskId: string, payload: string) => void;
-};
+import initialTasks from './initialTasks';
 
-const useTasks = create<TaskState>((set) => ({
-  tasks: [
-    {
-      id: uuidv4(),
-      title: 'Task num 1',
-      isCompleted: false,
-      isImportant: false,
-      steps: [
-        { id: uuidv4(), title: 'step 1.1', isCompleted: false, steps: [] },
-        { id: uuidv4(), title: 'step 1.2', isCompleted: true, steps: [] },
-        { id: uuidv4(), title: 'step 1.3', isCompleted: false, steps: [] },
-      ],
-      isCardExpanded: true,
-      link: 'https://jsonplaceholder.typicode.com/posts/',
-    },
-    {
-      id: uuidv4(),
-      title: 'Task num 2',
-      isCompleted: true,
-      isImportant: false,
-      isCardExpanded: false,
-      link: 'https://www.google.com/',
-      steps: [],
-    },
-    {
-      id: uuidv4(),
-      title: 'Task num 3',
-      isCompleted: false,
-      isImportant: true,
-      steps: [
-        { id: uuidv4(), title: 'step 2.1', isCompleted: true, steps: [] },
-        { id: uuidv4(), title: 'step 2.2', isCompleted: false, steps: [] },
-      ],
-      isCardExpanded: false,
-    },
-    {
-      id: uuidv4(),
-      title: 'Task num 4',
-      isCompleted: true,
-      isCardExpanded: false,
-      steps: [],
-    },
-  ],
+const useTasks = create<TasksStore>((set) => ({
+  tasks: initialTasks,
 
   addTask: (title) =>
     set((state) => ({
@@ -68,6 +16,8 @@ const useTasks = create<TaskState>((set) => ({
           isCompleted: false,
           isCardExpanded: false,
           steps: [],
+          note: '',
+          link: '',
         },
       ],
     })),
@@ -108,8 +58,20 @@ const useTasks = create<TaskState>((set) => ({
     set((state) => ({
       tasks: state.tasks.map((task) =>
         task.id === taskId
-          ? { ...task, isCardExpanded: true }
+          ? { ...task, isCardExpanded: !task.isCardExpanded }
           : { ...task, isCardExpanded: false },
+      ),
+    })),
+
+  addLink: (taskId, newLink) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              link: newLink,
+            }
+          : task,
       ),
     })),
 
@@ -128,8 +90,23 @@ const useTasks = create<TaskState>((set) => ({
               ...task,
               steps: [
                 ...task.steps,
-                { id: uuidv4(), isCompleted: false, steps: [], title: payload },
+                { id: uuidv4(), isStepDone: false, title: payload },
               ],
+            }
+          : task,
+      ),
+    })),
+
+  toggleStepDone: (stepId) => set((state) => ({})),
+  removeStep: (stepId) => set((state) => ({})),
+
+  addNote: (taskId, payload) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              note: payload,
             }
           : task,
       ),

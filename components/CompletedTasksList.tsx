@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { MdClearAll } from 'react-icons/md';
 
-import Modal from './Modal';
-import TaskItem from './TaskItem';
+import Modal from './modal/Modal';
+import TaskItem from './TaskCard';
 import useTasks from '@/hooks/useTasks';
 
-const CompletedTasksList = () => {
+export default function CompletedTasksList() {
   const { tasks, clearCompletedTasks } = useTasks();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -20,8 +20,8 @@ const CompletedTasksList = () => {
           setIsModalOpen={setIsModalOpen}
         />
       )}
-      <div className="mb-1 flex items-center justify-between px-2">
-        <h2 className="text-lg font-medium">Completed Tasks</h2>
+      <div className="mb-1 flex items-center justify-between px-2 ">
+        <h2 className="select-none text-lg font-medium">Completed Tasks</h2>
         <div className="flex items-center">
           <button
             onClick={() => setIsModalOpen(true)}
@@ -31,13 +31,11 @@ const CompletedTasksList = () => {
           </button>
         </div>
       </div>
-      {tasks?.map((task) => {
+      {tasks.map((task) => {
         if (task.isCompleted) {
           return <TaskItem key={task.id} {...task} />;
         }
       })}
     </section>
   );
-};
-
-export default CompletedTasksList;
+}

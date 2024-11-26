@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { MdDoneAll } from 'react-icons/md';
 
-import Modal from './Modal';
-import TaskItem from './TaskItem';
+import Modal from './modal/Modal';
+import TaskCard from './TaskCard';
 import useTasks from '@/hooks/useTasks';
 
-const OngoingTasksList = () => {
+export default function OngoingTasksList() {
   const { tasks, checkTasksDone } = useTasks();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const undoneTasksCount = tasks.filter((task) => !task.isCompleted).length;
   const modalMessage = 'Mark each task as completed?';
 
@@ -21,7 +22,7 @@ const OngoingTasksList = () => {
         />
       )}
       {undoneTasksCount === 0 && (
-        <h2 className="mt-8 animate-fade-down text-center text-lg font-medium capitalize animate-normal animate-duration-200 animate-fill-both animate-once animate-ease-out dark:text-white">
+        <h2 className="mt-8 animate-fade-down select-none text-center text-lg font-medium capitalize animate-normal animate-duration-200 animate-fill-both animate-once animate-ease-out dark:text-white">
           😎 There is nothing to do!
         </h2>
       )}
@@ -42,12 +43,12 @@ const OngoingTasksList = () => {
           <div className="flex flex-col gap-2">
             {tasks.map((task) => {
               if (!task.isCompleted && task.isImportant) {
-                return <TaskItem key={task.id} {...task} />;
+                return <TaskCard key={task.id} {...task} />;
               }
             })}
             {tasks.map((task) => {
               if (!task.isCompleted && !task.isImportant) {
-                return <TaskItem key={task.id} {...task} />;
+                return <TaskCard key={task.id} {...task} />;
               }
             })}
           </div>
@@ -55,6 +56,4 @@ const OngoingTasksList = () => {
       )}
     </section>
   );
-};
-
-export default OngoingTasksList;
+}
