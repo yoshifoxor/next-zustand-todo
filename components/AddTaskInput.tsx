@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { BsPlus } from 'react-icons/bs';
+import { useState } from 'react'
+import { BsPlus } from 'react-icons/bs'
 
-import useTasks from '@/hooks/useTasks';
+import useTasks from '@/hooks/useTasks'
 
 export default function AddTaskInput() {
-  const { addTask } = useTasks();
-  const [value, setValue] = useState('');
+  const { addTask } = useTasks()
+  const [value, setValue] = useState('')
 
   return (
     <div className="relative">
@@ -16,8 +16,8 @@ export default function AddTaskInput() {
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            addTask(value);
-            setValue('');
+            addTask(value)
+            setValue('')
           }
         }}
         placeholder="Add a new task..."
@@ -30,5 +30,5 @@ export default function AddTaskInput() {
         <BsPlus size={28} />
       </button>
     </div>
-  );
+  )
 }

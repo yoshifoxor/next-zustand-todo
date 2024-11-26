@@ -1,22 +1,22 @@
-import { IconType } from 'react-icons';
-import { BiExpandVertical } from 'react-icons/bi';
-import { BsStar, BsStarFill, BsTrash3 } from 'react-icons/bs';
+import { IconType } from 'react-icons'
+import { BiExpandVertical } from 'react-icons/bi'
+import { BsStar, BsStarFill, BsTrash3 } from 'react-icons/bs'
 
-import useTasks from '@/hooks/useTasks';
+import useTasks from '@/hooks/useTasks'
 
 type TaskProps = {
-  task: Task;
-  setIsModalOpen: (arg: boolean) => void;
-};
+  task: Task
+  setIsModalOpen: (arg: boolean) => void
+}
 
 type ModifierIconProps = {
-  onClick: () => void;
-  Icon: IconType;
-};
+  onClick: () => void
+  Icon: IconType
+}
 
 export default function Task({ task, setIsModalOpen }: TaskProps) {
-  const { toggleTaskDone, toggleImportance, toggleExpandCard } = useTasks();
-  const { id, isCompleted, title, isImportant, isCardExpanded } = task;
+  const { toggleTaskDone, toggleImportance, toggleExpandCard } = useTasks()
+  const { id, isCompleted, title, isImportant, isCardExpanded } = task
 
   const ModifierIcon = ({ onClick, Icon }: ModifierIconProps) => (
     <button
@@ -25,7 +25,7 @@ export default function Task({ task, setIsModalOpen }: TaskProps) {
     >
       <Icon size={18} opacity={0.5} />
     </button>
-  );
+  )
 
   return (
     <div
@@ -73,5 +73,5 @@ export default function Task({ task, setIsModalOpen }: TaskProps) {
         </button>
       </div>
     </div>
-  );
+  )
 }
