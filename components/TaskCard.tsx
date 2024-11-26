@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-import Input from './input/Input';
-import LinkShow from './link/LinkShow';
-import Modal from './modal/Modal';
-import Step from './task/Step';
-import Task from './task/Task';
-import useTasks from '@/hooks/useTasks';
+import Input from './input/Input'
+import LinkShow from './link/LinkShow'
+import Modal from './modal/Modal'
+import Step from './task/Step'
+import Task from './task/Task'
+import useTasks from '@/hooks/useTasks'
 
 export default function TaskCard(task: Task) {
-  const { id, isCompleted, steps, isCardExpanded, link, note } = task;
-  const { deleteTask, addStep, addLink, addNote } = useTasks();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { id, isCompleted, steps, isCardExpanded, link, note } = task
+  const { deleteTask, addStep, addLink, addNote } = useTasks()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const modalDeleteMessage = 'Do you really want to remove this task?';
+  const modalDeleteMessage = 'Do you really want to remove this task?'
 
   return (
     <div
@@ -40,7 +40,7 @@ export default function TaskCard(task: Task) {
                 <h4 className="font-medium">Steps</h4>
                 <div className="flex flex-col gap-1 pl-6">
                   {steps.map((step) => (
-                    <Step key={step.id} step={step} />
+                    <Step key={step.id} step={step} taskId={id} />
                   ))}
                 </div>
               </div>
@@ -84,5 +84,5 @@ export default function TaskCard(task: Task) {
         </div>
       )}
     </div>
-  );
+  )
 }
